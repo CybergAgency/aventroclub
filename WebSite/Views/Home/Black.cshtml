@@ -1,0 +1,119 @@
+﻿@using System.Diagnostics
+
+@model WebSite.Dtos.IndexDto
+@{
+    Layout = null;
+}
+
+@{
+    int count = 1;
+    string currentYear = DateTime.Now.ToString("yyyy");
+    double rating = 5.0;
+    double decrementAmount = 0.1;
+
+
+}
+
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <!-- Meta setup -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="keywords" content="">
+    <meta name="decription" content="">
+    <meta name="designer" content="">
+    <!-- Title -->
+    <title>Best Online Casinos 2025</title>
+    <!-- Fav Icon -->
+    <link rel="icon" href="~/images/card.png" />
+    <link rel="stylesheet" href="~/css/style2.css" />
+</head>
+<body>
+    <main class="main_wrapper">
+        <div class="custom_container">
+            <div class="title_cnt">
+                <h2>Best Online Casinos @currentYear</h2>
+                <p></p>
+                <p style="text-align: center;">Discover the top online casinos of @currentYear, offering insights into the best gambling options. Play for real cash and win big today!</p>
+            </div>
+            <div class="sports_main">
+                <div class="sports_prt">
+                    <div class="sport_heading">
+                        <ul>
+                            <li class="head" style="width:50px;"></li>
+                            <li class="heading1">CASINO</li>
+                            <li class="heading2">FEATURES</li>
+                            <li class="heading3">BONUS</li>
+                            <li class="heading4">RATE</li>
+                        </ul>
+                    </div>
+                    @if (Model is not null)
+                    {
+                        @foreach (var item in Model?.Brands)
+                        {
+                            var sw = Stopwatch.StartNew();
+                            <div class="sport_box" style="height:235px;">
+                                <div class="sports_number">
+                                    <span>@count</span>
+                                </div>
+                                <div style="width: 100%;
+                                    height: 100%;
+                                    display: flex;
+                                    flex-direction: column;
+                                    justify-content: center;">
+                                    <div class="sport_items" style="height:70%;">
+                                        <div class="sport_item1">
+
+                                            <div class="sports_logo">
+                                                <a data-vid="@ViewBag.VisitId" href="@item.Url" target="_blank">
+                                                    <img style="width:100%" loading="lazy" class="dynamic-image" src="@("https://fastcdn.site/gallery/" + @item.Logo)" alt="Logo">
+                                                </a>
+                                            </div>
+
+                                        </div>
+                                        <div class="sport_item2">
+                                            <ul>
+                                                <li>@* <img src="~/assets/new/images/check.png" alt=""> *@ @item.Option1</li>
+                                                <li>@* <img src="~/assets/new/images/check.png" alt=""> *@ @item.Option2</li>
+                                                <li>@* <img src="~/assets/new/images/check.png" alt=""> *@ @item.Option3</li>
+                                            </ul>
+                                            <div class="payment_method">
+                                                @foreach (var ptype in item.PaymentOptions)
+                                                {
+                                                    <div class="payment_item" style="background-color:white; padding:2px; margin:2px;background:white;border-radius:2px;display:flex;width:@(Math.Min(450.0 / (item?.PaymentOptions.Count() ?? 1), 50.0))px; height:@(Math.Min(350.0 / (item?.PaymentOptions.Count() ?? 1), 30.0))px ">
+                                                        <img loading="lazy" src="@("https://fastcdn.site/gallery/" + @ptype)" alt="@ptype" style="height:100%;object-fit:contain;">
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="sport_item3">
+                                            <h4>@item?.Description</h4>
+                                        </div>
+                                        <div class="sport_item4">
+                                            <ul>
+                                                <li><a target="_blank" data-vid="@ViewBag.VisitId" href="@item?.Url" style="color: #04005E !important;">RATE: <strong>@rating.ToString("0.0")/5</strong> @* <img src="~/assets/new/images/star.png" alt=""> *@</a></li>
+                                                <li><a style="background-color:#155AE5" data-vid="@ViewBag.VisitId" target="_blank" href="@item.Url">Play Now</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            sw.Stop();
+                            Console.WriteLine($"[DEBUG] Döngü item {count} render süresi: {sw.ElapsedMilliseconds} ms");
+                            count++;
+                            rating -= decrementAmount;
+                            if (rating < 4.5) rating = 4.5;
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+
+</body>
+</html>

@@ -1,0 +1,481 @@
+﻿a, a:active, a:hover, a:visited {
+    text-decoration: none
+}
+
+.title_cnt h2, .title_cnt p {
+    color: #04005e
+}
+
+.sport_heading ul li, body {
+    color: #fff
+}
+
+.sport_item4 ul li a, body {
+    font-size: 16px;
+    font-weight: 400
+}
+
+    .sport_heading ul li, .sport_item4 ul li a.active {
+        font-size: 18px;
+        text-transform: uppercase;
+        font-weight: 700
+    }
+
+html {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -ms-overflow-style: scrollbar
+}
+
+*, ::after, ::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0
+}
+
+a {
+    display: inline-block
+}
+
+ol, ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0
+}
+
+img {
+    max-width: 100%
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    margin-top: 0;
+    margin-bottom: 12px
+}
+
+body {
+    font-family: 'Roboto Condensed',sans-serif;
+    background: no-repeat fixed #000c1a;
+    margin: 0;
+    padding: 0
+}
+
+.main_wrapper {
+    background: #ebedf5 !important;
+    min-height: 100vh;
+    padding: 30px 0 70px
+}
+
+.custom_container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 15px
+}
+
+.title_cnt h2 {
+    font-size: 36px;
+    font-weight: 700;
+    text-align: center;
+    margin: 0
+}
+
+.sport_box, .sport_heading ul {
+    align-items: center;
+    margin-bottom: 8px;
+    display: flex
+}
+
+.sport_items {
+    display: flex
+}
+
+.sports_main {
+    padding-top: 40px
+}
+
+.sport_heading ul {
+    background: #155ae5;
+    padding: 15px;
+    border-radius: 10px 10px 0 0
+}
+
+    .sport_heading ul .heading1 {
+        width: 27%;
+        display: flex;
+        justify-content: center
+    }
+
+    .sport_heading ul .heading2 {
+        width: 35%;
+        display: flex;
+        justify-content: center
+    }
+
+    .sport_heading ul .heading3 {
+        width: 15%;
+        display: flex;
+        justify-content: center
+    }
+
+    .sport_heading ul .heading4 {
+        width: 20%;
+        display: flex;
+        justify-content: center
+    }
+
+.sport_box {
+    background: #fff
+}
+
+    .sport_box:hover {
+        border: .1rem solid #1b57f1;
+        box-shadow: .7703016400337219px 1.5406032800674438px 1.5406032800674438px 0 rgba(243,243,243,.11) inset,0 3.0812065601348877px 3.0812065601348877px 0 rgba(0,0,0,.11);
+        backdrop-filter: blur(2.3109049797058105px)
+    }
+
+.sport_item1 {
+    width: 27%;
+    display: flex;
+    align-items: center;
+    margin: auto;
+    display: flex;
+    justify-content: center
+}
+
+.sport_item2 {
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto
+}
+
+.sport_item3, .sports_number {
+    align-items: center;
+    display: flex
+}
+
+.sport_item3 {
+    width: 15%;
+    justify-content: center;
+    text-align: center
+}
+
+.sport_item4 {
+    width: 20%;
+    margin: auto;
+    padding: 0 15px
+}
+
+.sports_number {
+    width: 50px;
+    height: 235px;
+    background: #155ae5;
+    justify-content: center
+}
+
+    .sports_number span {
+        font-size: 17px;
+        font-weight: 700;
+        color: #fffF
+    }
+
+.sports_logo {
+    margin: 0 14px
+}
+
+    .payment_item a, .sports_logo a {
+        display: block
+    }
+
+    .sports_logo img {
+        max-width: 150px;
+        border-radius: 10px
+    }
+
+.sport_item2 ul li {
+    display: flex;
+    align-items: center;
+    font-size: 17px;
+    color: #04005e !important;
+    margin-bottom: 3px;
+    font-weight: 700
+}
+
+    .sport_item2 ul li img {
+        max-width: 12px;
+        margin-right: 8px
+    }
+
+.payment_method {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding-top: 10px;
+    padding-left: 0
+}
+
+.payment_item {
+    width: 14%;
+    padding: 5px;
+    background-color: #fff;
+    border: 1px solid #cce3f8;
+    margin: 2px
+}
+
+    .payment_item img {
+        width: 100%
+    }
+
+.sport_item4 ul li {
+    padding: 6px 0
+}
+
+    .sport_item4 ul li a {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: #fff;
+        background: 0 0;
+        border: 2px solid #155ae5;
+        padding: 12.5px 10px;
+        border-radius: 6px;
+        transition: .2s
+    }
+
+        .sport_item4 ul li a img {
+            max-width: 19px;
+            position: relative;
+            top: -1.5px;
+            left: 2px
+        }
+
+        .sport_item4 ul li a strong {
+            display: inline-block;
+            margin: 0 4px
+        }
+
+        .sport_item4 ul li a.active {
+            background: #fd5821;
+            border-color: #fd5821
+        }
+
+        .sport_item4 ul li a:hover {
+            opacity: .8
+        }
+
+.sports_name h4 {
+    font-size: 21px;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+    margin: 0
+}
+
+.sport_item3 h4, .sport_item3 p {
+    color: #04005e !important;
+    text-transform: uppercase
+}
+
+.sport_item3 p {
+    font-size: 17px;
+    font-weight: 400;
+    margin-bottom: 7px
+}
+
+.sport_item3 h4 {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0
+}
+
+@media screen and (min-width:992px) and (max-width:1180px) {
+    .sports_number {
+        width: 15%;
+        height: 215px
+    }
+
+    .sports_logo {
+        width: 50%;
+        margin: 0;
+        padding: 0 14px
+    }
+
+    .sports_name {
+        width: 35%
+    }
+
+    .sports_logo img {
+        max-width: 100%;
+        width: 100%
+    }
+
+    .sports_name h4 {
+        font-size: 20px
+    }
+}
+
+@media screen and (max-width:991px) {
+    .footer_text, .item_description, .sport_item3 {
+        text-align: center
+    }
+
+    .sport_box {
+        height: 100% !important
+    }
+
+    .list_features {
+        justify-content: center
+    }
+
+    .list_1 {
+        display: none !important
+    }
+
+    .footer_top {
+        flex-direction: column;
+        gap: 20px
+    }
+
+    .list_cert, .list_menu {
+        flex-direction: column
+    }
+
+        .list_menu > li a {
+            font-size: 18px
+        }
+
+    .footer_text {
+        width: 90%;
+        margin: auto !important
+    }
+
+    .footer_bottom {
+        flex-direction: column-reverse;
+        gap: 20px
+    }
+
+    .header_burger {
+        display: block
+    }
+
+    .sport_item3 h4, .sports_number span, .title_cnt h2 {
+        font-size: 30px
+    }
+
+    .sport_heading {
+        display: none
+    }
+
+    .sport_box, .sport_items {
+        display: block;
+        position: relative;
+        margin-bottom: 15px;
+        border: 2px solid #1f56f1;
+        border-radius: 15px;
+        padding-bottom: 10px
+    }
+
+    .sport_items {
+        border: 0
+    }
+
+        .sport_items > div {
+            width: 100%;
+            padding: 10px 10px 7px
+        }
+
+    .payment_method {
+        padding: 0;
+        margin-top: 15px
+    }
+
+    .sports_logo {
+        padding: 0;
+        width: 50%;
+        margin: 0
+    }
+
+    .sport_item2 ul li, .sport_item3 p {
+        font-size: 20px
+    }
+
+        .sport_item2 ul li img {
+            max-width: 15px
+        }
+
+    .sport_item4 ul li a {
+        font-size: 20px;
+        padding: 15px
+    }
+
+        .sport_item4 ul li a.active {
+            font-size: 22px
+        }
+
+    .sports_logo img {
+        max-width: 100%;
+        width: 100%
+    }
+
+    .sport_item1 {
+        flex-wrap: wrap
+    }
+
+    .sports_name {
+        width: 50%;
+        margin: 0;
+        padding-left: 35px
+    }
+
+    .sports_number {
+        width: 70px;
+        height: 70px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        border-radius: 0 15px
+    }
+
+    .sports_name h4 {
+        font-size: 40px
+    }
+}
+
+@media screen and (max-width:576px) {
+    .sport_box > div {
+        padding: 20px 16px 10px
+    }
+
+    .sports_number {
+        width: 50px;
+        height: 50px
+    }
+
+        .sports_number span {
+            font-size: 20px
+        }
+
+    .sports_name {
+        padding-left: 15px
+    }
+
+        .sports_name h4 {
+            font-size: 24px
+        }
+
+    .sport_item2 ul li {
+        font-size: 18px
+    }
+
+        .sport_item2 ul li img {
+            max-width: 13px
+        }
+}
+
+.item_description:hover {
+    text-decoration: underline !important
+}
