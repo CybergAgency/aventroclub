@@ -29,6 +29,7 @@ namespace WebSite.Controllers
         private readonly IMemoryCache _cache = cache;
 
         [HttpGet]
+        [EnableRateLimiting("ip_based_limiter")]
         public async Task<IActionResult> Index([FromQuery] string? gcLid, [FromQuery] string? secretKey, CancellationToken cancellationToken = default)
         {
             var webSiteName = _configuration["WebSiteName"];
@@ -249,6 +250,7 @@ namespace WebSite.Controllers
         }
 
         [HttpGet("url")]
+        [EnableRateLimiting("ip_based_limiter")]
         public async Task<IActionResult> GoTo([FromQuery] string c, CancellationToken cancellationToken)
         {
             var key = _configuration["StringEncryptionKey"]!;

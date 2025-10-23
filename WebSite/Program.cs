@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.RateLimiting;
 using WebSite.Data;
 using WebSite.Data.Models;
 using WebSite.Services;
@@ -11,16 +12,38 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRateLimiter(options =>
 {
-    options.RejectionStatusCode = 429;
+    options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+
     options.OnRejected = async (context, cancellationToken) =>
     {
-        context.HttpContext.Response.StatusCode = 429;
-        await context.HttpContext.Response.WriteAsync("Too many requests.");
+        var ipAddress = context.HttpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown";
+        var logger = context.HttpContext.RequestServices
+            .GetRequiredService<ILogger<Program>>();
+
+        logger.LogWarning("Rate limit exceeded for IP: {IpAddress}, Path: {Path}",
+            ipAddress, context.HttpContext.Request.Path);
+
+        context.HttpContext.Response.StatusCode = StatusCodes.Status429TooManyRequests;
+        context.HttpContext.Response.ContentType = "text/plain";
+
+        await context.HttpContext.Response.WriteAsync(
+            "Too many requests. Please try again later.",
+            cancellationToken);
     };
-    options.AddFixedWindowLimiter("ip_based_limiter", opt =>
+
+    options.AddPolicy("ip_based_limiter", context =>
     {
-        opt.PermitLimit = 5;
-        opt.Window = TimeSpan.FromSeconds(10);
+        var ipAddress = context.Connection.RemoteIpAddress?.ToString() ?? "unknown";
+
+        return RateLimitPartition.GetFixedWindowLimiter(
+            partitionKey: ipAddress,
+            factory: _ => new FixedWindowRateLimiterOptions
+            {
+                PermitLimit = 100,
+                Window = TimeSpan.FromMinutes(1),
+                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                QueueLimit = 0
+            });
     });
 });
 
@@ -59,9 +82,8 @@ app.UseStaticFiles();
 app.UseForwardedHeaders();
 
 app.UseRouting();
-
-app.UseAuthorization();
 app.UseRateLimiter();
+app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

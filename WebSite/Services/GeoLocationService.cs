@@ -19,7 +19,7 @@ namespace WebSite.Services
             CountryInfo countryInfo = new CountryInfo();
             try
             {
-                string apiKey = "b10c26b12d706ffac2dd71c351e996c20e28e3566cb248a0ae668b7f"; // API anahtarınızı buraya ekleyin
+                string apiKey = "b10c26b12d706ffac2dd71c351e996c20e28e3566cb248a0ae668b7f";
                 string url = $"https://api.ipdata.co/{ipAddress}?api-key={apiKey}";
 
                 using (var httpClient = new HttpClient())
