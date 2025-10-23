@@ -33,7 +33,6 @@ namespace WebSite.Controllers
         public async Task<IActionResult> Index([FromQuery] string? gcLid, [FromQuery] string? secretKey, CancellationToken cancellationToken = default)
         {
             var webSiteName = _configuration["WebSiteName"];
-            var key = _configuration["StringEncryptionKey"]!;
 
             if (webSiteName == null)
             {
@@ -90,7 +89,7 @@ namespace WebSite.Controllers
 
             var gCLid = await _context.AddGclidIfPresentAsync(gcLid, webSite, cancellationToken);
 
-            var userIp = HttpContext.Connection.RemoteIpAddress?.ToString();
+            var userIp = HttpContext.Request.Headers["CF-Connecting-IP"].FirstOrDefault();
             CountryInfo requestCountry = await _geoLocationService.GetCountryInfoAsync(userIp, cancellationToken);
 
             try
