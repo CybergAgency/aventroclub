@@ -67,8 +67,8 @@
                                         <div class="sport_item1">
 
                                             <div class="sports_logo">
-                                                <a data-vid="@ViewBag.VisitId" href="@item.Url" target="_blank">
-                                                    <img style="width:100%" loading="lazy" class="dynamic-image" src="@("https://fastcdn.site/gallery/" + @item.Logo)" alt="Logo">
+                                                <a href="@item.Url" target="_blank">
+                                                    <img style="width:100%" loading="lazy" class="dynamic-image" src="@("https://fluxscdn.com/gallery/" + @item.Logo)" alt="@item.Name">
                                                 </a>
                                             </div>
 
@@ -83,7 +83,7 @@
                                                 @foreach (var ptype in item.PaymentOptions)
                                                 {
                                                     <div class="payment_item" style="background-color:white; padding:2px; margin:2px;background:white;border-radius:2px;display:flex;width:@(Math.Min(450.0 / (item?.PaymentOptions.Count() ?? 1), 50.0))px; height:@(Math.Min(350.0 / (item?.PaymentOptions.Count() ?? 1), 30.0))px ">
-                                                        <img loading="lazy" src="@("https://fastcdn.site/gallery/" + @ptype)" alt="@ptype" style="height:100%;object-fit:contain;">
+                                                        <img loading="lazy" src="@("https://fluxscdn.com/gallery/" + @ptype)" alt="@ptype" style="height:100%;object-fit:contain;">
                                                     </div>
                                                 }
                                             </div>

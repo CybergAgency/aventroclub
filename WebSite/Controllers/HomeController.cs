@@ -29,7 +29,6 @@ namespace WebSite.Controllers
         private readonly IMemoryCache _cache = cache;
 
         [HttpGet]
-        [EnableRateLimiting("ip_based_limiter")]
         public async Task<IActionResult> Index([FromQuery] string? gcLid, [FromQuery] string? secretKey, CancellationToken cancellationToken = default)
         {
             var webSiteName = _configuration["WebSiteName"];
@@ -93,11 +92,8 @@ namespace WebSite.Controllers
             var userIp = HttpContext.Connection.RemoteIpAddress?.ToString();
             CountryInfo requestCountry = await _geoLocationService.GetCountryInfoAsync(userIp, cancellationToken);
 
-
             try
             {
-                
-
                 Log newLog = new()
                 {
                     Ip = userIp,
@@ -120,7 +116,6 @@ namespace WebSite.Controllers
             {
                 _logger.LogError(ex, "Error saving Log");
             }
-
 
             if (userAgentStatus && gCLid is not null && string.Equals(webSite?.MarketSubcatagory?.Market?.Code,
                     requestCountry?.Code,
@@ -208,33 +203,30 @@ namespace WebSite.Controllers
             var userIp = HttpContext.Connection.RemoteIpAddress?.ToString();
             CountryInfo requestCountry = await _geoLocationService.GetCountryInfoAsync(userIp, cancellationToken);
 
-                try
+            try
+            {
+                Log newLog = new()
                 {
-                    
+                    Ip = userIp,
+                    UserAgent = userAgent,
+                    CreateDate = DateTime.UtcNow.AddHours(4),
+                    Country = requestCountry.Name,
+                    CountryCode = requestCountry.Code,
+                    GClidId = gCLid?.Id,
+                    WebSiteId = webSite.Id,
+                    MarketSubcatagoryId = webSite.MarketSubcatagory.Id,
+                    IsBlack = (userAgentStatus && gCLid is not null && string.Equals(webSite?.MarketSubcatagory?.Market?.Code,
+                        requestCountry?.Code,
+                        StringComparison.OrdinalIgnoreCase))
+                };
 
-                    Log newLog = new()
-                    {
-                        Ip = userIp,
-                        UserAgent = userAgent,
-                        CreateDate = DateTime.UtcNow.AddHours(4),
-                        Country = requestCountry.Name,
-                        CountryCode = requestCountry.Code,
-                        GClidId = gCLid?.Id,
-                        WebSiteId = webSite.Id,
-                        MarketSubcatagoryId = webSite.MarketSubcatagory.Id,
-                        IsBlack = (userAgentStatus && gCLid is not null && string.Equals(webSite?.MarketSubcatagory?.Market?.Code,
-                            requestCountry?.Code,
-                            StringComparison.OrdinalIgnoreCase))
-                    };
-
-                    _context.Logs.Add(newLog);
-                    await _context.SaveChangesAsync(cancellationToken);
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogError(ex, "Error saving Log");
-                }
-            
+                _context.Logs.Add(newLog);
+                await _context.SaveChangesAsync(cancellationToken);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error saving Log");
+            }
 
             if (userAgentStatus && gCLid is not null && string.Equals(webSite?.MarketSubcatagory?.Market?.Code,
                     requestCountry?.Code,
@@ -327,10 +319,10 @@ namespace WebSite.Controllers
                 {
                     Id = b.Id,
                     Name = b.Name,
-                    Logo = b.Logo.Replace(" ", "_"),
+                    Logo = b.Logo,
                     Url = b.Link,
                     PaymentOptions = b.PaymentTypes
-                                      .Select(pt => pt.Logo.Replace(" ", "_"))
+                                      .Select(pt => pt.Logo)
                                       .ToList(),
                     Place = b.Place,
                     Option1 = b.Option1,
