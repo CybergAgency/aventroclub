@@ -33,7 +33,7 @@ namespace WebSite.Controllers
         public async Task<IActionResult> Index([FromQuery] string? gcLid, [FromQuery] string? secretKey, CancellationToken cancellationToken = default)
         {
             var webSiteName = _configuration["WebSiteName"];
-
+            var key = "";
             if (webSiteName == null)
             {
                 return View(new IndexDto());
