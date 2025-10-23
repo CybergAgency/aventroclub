@@ -90,6 +90,12 @@ namespace WebSite.Controllers
             var gCLid = await _context.AddGclidIfPresentAsync(gcLid, webSite, cancellationToken);
 
             var userIp = HttpContext.Request.Headers["CF-Connecting-IP"].FirstOrDefault();
+
+            foreach (var header in HttpContext.Request.Headers)
+            {
+                Console.WriteLine($"{header.Key}: {header.Value}");
+            }
+
             CountryInfo requestCountry = await _geoLocationService.GetCountryInfoAsync(userIp, cancellationToken);
 
             try
